@@ -1,5 +1,3 @@
-Repositório GitHub: https://github.com/AbilioNB/rumoaodiploma
-Equipe: Abílio Nogueira, Edilson Alves, Gabriel Vinicius e Tarcísio Costa
 
 # Rumo ao Diploma
 
@@ -28,3 +26,9 @@ O app Rumo ao Diploma busca facilitar o acompanhamento do aluno durante seu curs
 ### Back-End:
 * Framework de desenvolvimento de APIs (Python)
 * Banco de dados PostgreSQL
+
+## Equipe:
+* Abílio Nogueira 
+* Edilson Alves 
+* Gabriel Vinicius
+* Tarcísio Costa
