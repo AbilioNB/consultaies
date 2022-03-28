@@ -20,6 +20,10 @@
     }
   }
 
+  body{
+    height: 100%;
+  }
+
   h1,
   h2,
   h3,
@@ -29,13 +33,24 @@
     margin: 8px 0;
   }
 
-  .title{
+  .div-title{
+    display: flex;
+    justify-content: center;
     color: #1976d2;
-    font-size: 100px;
-    font-weight: bold;
+    width: 100%;
     margin-top: 18%;
     margin-bottom: 10%;
+    .title{
+      font-size: 100px;
+      font-weight: bold;
+      margin-left: 10%;
+    }
+    .icon-span{
+      font-size: 100px;
+      margin-top: -3%;
+    }
   }
+  
  
   .div-select{
     width: 100%;
