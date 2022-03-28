@@ -7,6 +7,19 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  ::ng-deep{
+    .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+      color: #1976d2 !important;
+    }
+    .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+      color: #1976d2 !important;
+    }
+    .mat-form-field.mat-focused .mat-form-field-label{
+      color: #1976d2 !important;
+      font-weight: bold;
+    }
+  }
+
   h1,
   h2,
   h3,
@@ -15,6 +28,51 @@
   h6 {
     margin: 8px 0;
   }
+
+  .title{
+    color: #1976d2;
+    font-size: 100px;
+    font-weight: bold;
+    margin-top: 18%;
+    margin-bottom: 10%;
+  }
+ 
+  .div-select{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+   
+    .select{
+      width: 40%;
+    }
+    
+    .btn-search{
+      margin-left: 2%;
+      background-color: #1976d2;
+      color: white;
+      font-weight: bold;
+      transition: transform 300ms, background-color 300ms;
+      animation: pulse 200ms;
+    }
+    .btn-search:hover{
+      transform: scale(1.05);
+      background-color: #258df5;
+    }
+    .btn-search:active{
+      transform: scale(0.95);
+      animation: none;
+    }
+    @keyframes pulse {
+      from{
+        box-shadow: #258df5 0 0 0;
+      }
+      to{
+        box-shadow: #258df5 0 0 22px;
+      }
+    }
+  }
+  
 
   p {
     margin: 0;
@@ -35,6 +93,7 @@
     background-color: #1976d2;
     color: white;
     font-weight: 600;
+    padding-left: 20px;
   }
 
   .toolbar img {
@@ -42,8 +101,9 @@
   }
 
   .toolbar span {
-      font-size: 25px;
-      font-weight: bold;
+    margin-left: 10px;
+    font-size: 25px;
+    font-weight: bold;
   }
 
   .toolbar #twitter-logo {
@@ -87,7 +147,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 16px;
+    margin-top: 5%;
     height: 100%;
     width: 120%;
   }

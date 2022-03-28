@@ -1,11 +1,12 @@
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
-  <img
+  <!-- <img
     width="40"
     alt="Angular Logo"
     src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
-  />
-  <span>Consultaies</span>
+  /> -->
+  <mat-icon class="icon-span">school</mat-icon>
+  <span>Consulta Ies</span>
     <div class="spacer"></div>
    
 </div>
@@ -19,38 +20,43 @@
 
   </div>
 
-  <!-- Next Steps -->
-  <h2>Next Steps</h2>
-  <p>What do you want to do next with your app?</p>
+  
+  <h1 class="title">Consulta Ies</h1>
 
-  <!-- <mat-form-field appearance="fill">
-    <mat-label>State</mat-label>
-    <mat-select>
-      <mat-option>None</mat-option>
-      <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
-    </mat-select>
-  </mat-form-field> -->
+  <div class="div-select">
+      <mat-form-field class="select" appearance="outline">
+        <mat-label>Instituição</mat-label>
+        <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option.nome}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+ 
+
+    <button mat-fab class="btn-search" aria-label="Example icon button with a delete icon">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  
 
   <input type="hidden" #selection>
 
   <div class="card-container">
     <button class="card card-small" (click)="selection.value = 'component'" tabindex="0">
-      <!-- <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg> -->
       <span>Text exemple</span>
     </button>
 
     <button class="card card-small" (click)="selection.value = 'material'" tabindex="0">
-      <!-- <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg> -->
       <span>Text exemple</span>
     </button>
 
     <button class="card card-small" (click)="selection.value = 'pwa'" tabindex="0">
-      <!-- <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg> -->
       <span>Text exemple</span>
     </button>
 
     <button class="card card-small" (click)="selection.value = 'dependency'" tabindex="0">
-      <!-- <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg> -->
       <span>Text exemple</span>
     </button>
 
