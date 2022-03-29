@@ -27,28 +27,30 @@
       </mat-form-field>
  
 
-    <button mat-fab class="btn-search" aria-label="Example icon button with a delete icon">
+    <button mat-fab class="btn-search" aria-label="Example icon button with a delete icon" (click)="search()">
       <mat-icon>search</mat-icon>
     </button>
   </div>
   
+  <div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
 
-  <input type="hidden" #selection>
 
-  <div class="card-container">
-    <button class="card card-small" (click)="selection.value = 'component'" tabindex="0">
+  <div class="card-container" *ngIf="!isLoading">
+    <button class="card card-small"  tabindex="0">
       <span>Text exemple</span>
     </button>
 
-    <button class="card card-small" (click)="selection.value = 'material'" tabindex="0">
+    <button class="card card-small"  tabindex="0">
       <span>Text exemple</span>
     </button>
 
-    <button class="card card-small" (click)="selection.value = 'pwa'" tabindex="0">
+    <button class="card card-small"  tabindex="0">
       <span>Text exemple</span>
     </button>
 
-    <button class="card card-small" (click)="selection.value = 'dependency'" tabindex="0">
+    <button class="card card-small"  tabindex="0">
       <span>Text exemple</span>
     </button>
 

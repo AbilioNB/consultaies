@@ -13,6 +13,7 @@ export interface Universidade {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  isLoading = false;
   title = 'consultaies';
   myControl = new FormControl();
   options: Universidade[] = [
@@ -40,5 +41,12 @@ export class AppComponent implements OnInit {
     return this.options.filter(option => option.nome.toLowerCase().includes(filterValue));
   }
 
+  public search(){
+    if (this.isLoading === false) {
+      this.isLoading = true;
+    }else{
+      this.isLoading = false;
+    }
+  }
   
 }
