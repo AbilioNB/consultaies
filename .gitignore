@@ -130,3 +130,5 @@ dmypy.json
 
 #Arquivos CSV base
 .data
+
+.web_project/
