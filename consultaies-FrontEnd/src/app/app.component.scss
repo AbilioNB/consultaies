@@ -22,6 +22,19 @@
       display: flex !important;
       justify-content: center !important;
     }
+
+    .spanNoDataFound{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      font-size: large;
+      font-weight: bold;
+      color: #888;
+      .noDataFoundIcon{
+        margin-left: 5px;
+      }
+    }
+
     .spinner-container{
       width: 1152px;
       height: 451px;
@@ -97,7 +110,37 @@
       }
     }
   }
+
+  .iesSelected{
+    border: 1px solid #1976d2;
+    border-radius: 10px;
+    width: 90%;
+    min-height: 251px;
+    background-color: white;
+    .closeIesSeleted{
+      position: relative;
+      box-shadow: none;
+      left: 95%;
+      top: 1%;
+      background-color: transparent;
+      color: #1976d2;
+      font-weight: bold;
+    }
+  }
   
+  .fab-btn-info{
+    color: white;
+    background-color: #1976d2;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    align-items: center;
+    // .iconInfo{
+    //   font-size: 40px;
+    //   margin-top: -14px;
+    //   margin-left: -13px;
+    // }
+  }
 
   p {
     margin: 0;

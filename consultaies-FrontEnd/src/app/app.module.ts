@@ -12,10 +12,12 @@ import {HttpClientModule} from '@angular/common/http';
 import {MaterialModule} from '../material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppDialogInfoComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AppDialogInfoComponent
   ],
   imports: [
     BrowserModule,

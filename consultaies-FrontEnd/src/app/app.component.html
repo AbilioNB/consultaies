@@ -9,9 +9,9 @@
   <div class="div-select">
       <mat-form-field class="select" appearance="outline">
         <mat-label>Instituição</mat-label>
-        <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option.co_ies">
+        <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" >
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="changeIes($event.option.value)">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
             {{option.no_ies}}
           </mat-option>
         </mat-autocomplete>
@@ -22,31 +22,66 @@
       <mat-icon>search</mat-icon>
     </button>
   </div>
-  
+
+  <div class="iesSelected" *ngIf="iesSeleted">
+
+    <button mat-mini-fab class="closeIesSeleted" (click)="closeCardIesSeleted()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <mat-grid-list cols="3" rowHeight="5:1">
+      <mat-grid-tile [colspan]="3"[rowspan]="1">
+        <H3>{{universitySeleted.no_ies}}</H3>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1"[rowspan]="1">
+        Estado: {{universitySeleted.no_uf_ies}}-{{universitySeleted.sg_uf_ies}}
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1"[rowspan]="1">
+        Tipo da Categoria Administrativa da IES: {{getTpCatAdm(universitySeleted.tp_categoria_administrativa)}}
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1"[rowspan]="1">
+        Municipio: {{universitySeleted.no_municipio_ies}}
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1"[rowspan]="1">
+        Sigla IES: {{universitySeleted.sg_ies}}
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1"[rowspan]="1">
+        Tipo da Organização Acadêmica da IES: {{getTpOrgAcad(universitySeleted.tp_organizacao_academica)}}
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1"[rowspan]="1">
+        Total de Docentes: {{universitySeleted.qt_docente_total}}
+      </mat-grid-tile>
+    </mat-grid-list>
+
+  </div>
+
+  <div class="spinner-container" *ngIf="noDataFound">
+    <span class="spanNoDataFound" >
+      Nenhum curso encontrado 
+      <mat-icon class="noDataFoundIcon">sentiment_very_dissatisfied</mat-icon>
+    </span>
+  </div>
+
   <div class="spinner-container" *ngIf="isLoading">
     <mat-spinner></mat-spinner>
   </div>
 
 
-  <div class="card-container" *ngIf="!isLoading">
-    <button class="card card-small"  tabindex="0">
-      <span>Text exemple</span>
-    </button>
-
-    <button class="card card-small"  tabindex="0">
-      <span>Text exemple</span>
-    </button>
-
-    <button class="card card-small"  tabindex="0">
-      <span>Text exemple</span>
-    </button>
-
-    <button class="card card-small"  tabindex="0">
-      <span>Text exemple</span>
+  <div class="card-container" *ngIf="!isLoading && courseOptions != [] && iesSeleted">
+    <button *ngFor="let courseOption of courseOptions" class="card card-small"  tabindex="0">
+      <span>{{ courseOption.no_cine_rotulo }}</span>
     </button>
 
   </div>
 
+  <div class="spinner-container" *ngIf="!isLoading">
+
+  </div>
+
+
+  <button mat-fab class="fab-btn-info" (click)="openDialogInfo()">
+    <mat-icon class="iconInfo">info_outlined</mat-icon>
+  </button>
 
   <!-- Footer -->
   <svg id="clouds" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
