@@ -81,169 +81,8 @@ export class AppComponent implements OnInit {
     try {
       this.iesSeleted = true;
       this.isLoading = true;
-      await new Promise(r => setTimeout(r, 2000));
-      this.courseOptions = [
-        {
-          "id_censo_curso": 1540,
-          "co_ies": 718,
-          "no_cine_rotulo": "Contabilidade",
-          "co_cine_rotulo": "0411C01",
-          "co_cine_area_geral": "4",
-          "no_cine_area_geral": "Negócios, administração e direito",
-          "co_cine_area_especifica": "41",
-          "no_cine_area_especifica": "Negócios e administração",
-          "co_cine_area_detalhada": "411",
-          "no_cine_area_detalhada": "Contabilidade e tributação",
-          "tp_grau_academico": 1,
-          "tp_modalidade_ensino": 2,
-          "qt_vaga_total": 0,
-          "qt_vaga_total_diurno": 0,
-          "qt_vaga_total_noturno": 0,
-          "qt_vaga_total_ead": 0,
-          "qt_mat": 10,
-          "qt_conc": 0
-        },
-        {
-          "id_censo_curso": 4613,
-          "co_ies": 1205,
-          "no_cine_rotulo": "Serviço social",
-          "co_cine_rotulo": "0923S01",
-          "co_cine_area_geral": "9",
-          "no_cine_area_geral": "Saúde e bem-estar",
-          "co_cine_area_especifica": "92",
-          "no_cine_area_especifica": "Bem-estar",
-          "co_cine_area_detalhada": "923",
-          "no_cine_area_detalhada": "Serviço social",
-          "tp_grau_academico": 1,
-          "tp_modalidade_ensino": 2,
-          "qt_vaga_total": 0,
-          "qt_vaga_total_diurno": 0,
-          "qt_vaga_total_noturno": 0,
-          "qt_vaga_total_ead": 0,
-          "qt_mat": 2,
-          "qt_conc": 0
-        },
-        {
-          "id_censo_curso": 1917,
-          "co_ies": 221,
-          "no_cine_rotulo": "Pedagogia",
-          "co_cine_rotulo": "0113P01",
-          "co_cine_area_geral": "1",
-          "no_cine_area_geral": "Educação",
-          "co_cine_area_especifica": "11",
-          "no_cine_area_especifica": "Educação",
-          "co_cine_area_detalhada": "113",
-          "no_cine_area_detalhada": "Formação de professores sem áreas específicas",
-          "tp_grau_academico": 2,
-          "tp_modalidade_ensino": 2,
-          "qt_vaga_total": 0,
-          "qt_vaga_total_diurno": 0,
-          "qt_vaga_total_noturno": 0,
-          "qt_vaga_total_ead": 0,
-          "qt_mat": 3,
-          "qt_conc": 0
-        },
-        {
-          "id_censo_curso": 4255,
-          "co_ies": 135,
-          "no_cine_rotulo": "Educação física formação de professor",
-          "co_cine_rotulo": "0114E03",
-          "co_cine_area_geral": "1",
-          "no_cine_area_geral": "Educação",
-          "co_cine_area_especifica": "11",
-          "no_cine_area_especifica": "Educação",
-          "co_cine_area_detalhada": "114",
-          "no_cine_area_detalhada": "Formação de professores em áreas específicas (exceto Letras)",
-          "tp_grau_academico": 2,
-          "tp_modalidade_ensino": 2,
-          "qt_vaga_total": 0,
-          "qt_vaga_total_diurno": 0,
-          "qt_vaga_total_noturno": 0,
-          "qt_vaga_total_ead": 0,
-          "qt_mat": 12,
-          "qt_conc": 3
-        },
-        {
-          "id_censo_curso": 13792,
-          "co_ies": 1472,
-          "no_cine_rotulo": "Biomedicina",
-          "co_cine_rotulo": "0914B01",
-          "co_cine_area_geral": "9",
-          "no_cine_area_geral": "Saúde e bem-estar",
-          "co_cine_area_especifica": "91",
-          "no_cine_area_especifica": "Saúde",
-          "co_cine_area_detalhada": "914",
-          "no_cine_area_detalhada": "Tecnologia de diagnóstico e tratamento médico",
-          "tp_grau_academico": 1,
-          "tp_modalidade_ensino": 2,
-          "qt_vaga_total": 0,
-          "qt_vaga_total_diurno": 0,
-          "qt_vaga_total_noturno": 0,
-          "qt_vaga_total_ead": 0,
-          "qt_mat": 85,
-          "qt_conc": 0
-        },
-        {
-          "id_censo_curso": 1699,
-          "co_ies": 1472,
-          "no_cine_rotulo": "Publicidade e propaganda",
-          "co_cine_rotulo": "0414P01",
-          "co_cine_area_geral": "4",
-          "no_cine_area_geral": "Negócios, administração e direito",
-          "co_cine_area_especifica": "41",
-          "no_cine_area_especifica": "Negócios e administração",
-          "co_cine_area_detalhada": "414",
-          "no_cine_area_detalhada": "Marketing e propaganda",
-          "tp_grau_academico": 1,
-          "tp_modalidade_ensino": 2,
-          "qt_vaga_total": 0,
-          "qt_vaga_total_diurno": 0,
-          "qt_vaga_total_noturno": 0,
-          "qt_vaga_total_ead": 0,
-          "qt_mat": 1,
-          "qt_conc": 0
-       },
-       {
-          "id_censo_curso": 450,
-          "co_ies": 163,
-          "no_cine_rotulo": "Geografia",
-          "co_cine_rotulo": "0312G01",
-          "co_cine_area_geral": "3",
-          "no_cine_area_geral": "Ciências sociais, comunicação e informação",
-          "co_cine_area_especifica": "31",
-          "no_cine_area_especifica": "Ciências sociais e comportamentais",
-          "co_cine_area_detalhada": "312",
-          "no_cine_area_detalhada": "Ciências sociais e políticas",
-          "tp_grau_academico": 1,
-          "tp_modalidade_ensino": 2,
-          "qt_vaga_total": 0,
-          "qt_vaga_total_diurno": 0,
-          "qt_vaga_total_noturno": 0,
-          "qt_vaga_total_ead": 0,
-          "qt_mat": 2,
-          "qt_conc": 0
-        },
-        {
-          "id_censo_curso": 4411,
-          "co_ies": 298,
-          "no_cine_rotulo": "Gestão de negócios",
-          "co_cine_rotulo": "0413G05",
-          "co_cine_area_geral": "4",
-          "no_cine_area_geral": "Negócios, administração e direito",
-          "co_cine_area_especifica": "41",
-          "no_cine_area_especifica": "Negócios e administração",
-          "co_cine_area_detalhada": "413",
-          "no_cine_area_detalhada": "Gestão e administração",
-          "tp_grau_academico": 3,
-          "tp_modalidade_ensino": 2,
-          "qt_vaga_total": 0,
-          "qt_vaga_total_diurno": 0,
-          "qt_vaga_total_noturno": 0,
-          "qt_vaga_total_ead": 0,
-          "qt_mat": 4,
-          "qt_conc": 2
-        }
-      ];
+      //await new Promise(r => setTimeout(r, 2000));
+      await this.getCourseFromIes(this.universitySeleted.co_ies);
       this.isLoading = false;
     } catch (error) {
       
@@ -263,6 +102,16 @@ export class AppComponent implements OnInit {
       data => {
         this.options = data;
         //console.log(this.options);
+      }
+    );
+  }
+
+  private async getCourseFromIes(co_ies: Number){
+    let urlForRequest = IES_API + 'api/curso/?search=' + co_ies;
+
+     await this.http.get<Course[]>(urlForRequest).subscribe(
+      data => {
+        this.courseOptions = data;
       }
     );
   }
