@@ -18,9 +18,12 @@ const IES_API = environment.IES_API;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  checked = true;
+  disabled = true;
   isLoading = false;
   noDataFound = false;
   iesSeleted = false;
+  courseSeleted = false;
   title = 'consultaies';
   myControl = new FormControl();
   universitySeleted: University = {
@@ -55,6 +58,26 @@ export class AppComponent implements OnInit {
     "in_participa_rede_social": 1,
     "in_catalogo_online": 1
   };
+  couseSeletec: Course = {
+    "id_censo_curso": 373,
+    "co_ies": 1540,
+    "no_cine_rotulo": "Psicologia",
+    "co_cine_rotulo": "0313P01",
+    "co_cine_area_geral": "3",
+    "no_cine_area_geral": "Ciências sociais, comunicação e informação",
+    "co_cine_area_especifica": "31",
+    "no_cine_area_especifica": "Ciências sociais e comportamentais",
+    "co_cine_area_detalhada": "313",
+    "no_cine_area_detalhada": "Psicologia",
+    "tp_grau_academico": 1,
+    "tp_modalidade_ensino": 1,
+    "qt_vaga_total": 100,
+    "qt_vaga_total_diurno": 0,
+    "qt_vaga_total_noturno": 100,
+    "qt_vaga_total_ead": 0,
+    "qt_mat": 57,
+    "qt_conc": 7
+  };
   options: University[] = [];
   courseOptions: Course[] = [];
   filteredOptions!: Observable<University[]>;
@@ -76,23 +99,39 @@ export class AppComponent implements OnInit {
     return this.options.filter(option => option.no_ies.toLowerCase().includes(filterValue));
   }
 
-  public async search(){
+  public async search(IES: University){
 
     try {
       this.iesSeleted = true;
       this.isLoading = true;
       //await new Promise(r => setTimeout(r, 2000));
-      await this.getCourseFromIes(this.universitySeleted.co_ies);
+      await this.changeIes(IES);
+      await this.getCourseFromIes(IES.co_ies);
       this.isLoading = false;
     } catch (error) {
       
     }
-
-    // if (this.noDataFound === false) {
-    //   this.noDataFound = true;
-    // }else{
-    //   this.noDataFound = false;
-    // }
+  }
+  closeIes(){
+    this.iesSeleted = false;
+    this.courseSeleted = false;
+  }
+  closeCourse(){
+    this.courseSeleted = false;
+  }
+  isChecked(value: Number){
+    if (value == 0) {
+      return false;
+    }else{
+      return true;
+    }
+  }
+  getModalidade(value: Number){
+    if (value == 1) {
+      return "Presencial";
+    } else {
+      return "Curso a distância";
+    }
   }
 
   private getIes(){
@@ -106,12 +145,13 @@ export class AppComponent implements OnInit {
     );
   }
 
-  private async getCourseFromIes(co_ies: Number){
+  async getCourseFromIes(co_ies: Number){
     let urlForRequest = IES_API + 'api/curso/?search=' + co_ies;
 
      await this.http.get<Course[]>(urlForRequest).subscribe(
       data => {
         this.courseOptions = data;
+        console.log(this.courseOptions);
       }
     );
   }
@@ -138,6 +178,11 @@ export class AppComponent implements OnInit {
 
   changeIes(value: University){
     this.universitySeleted = value;
+    console.log(value);
+  }
+  changeCourse(value: Course){
+    this.couseSeletec = value;
+    this.courseSeleted = true;
     console.log(value);
   }
 
@@ -206,10 +251,52 @@ export class AppComponent implements OnInit {
     return tpCatAdm;
   }
 
+  capitalizeFirstChar(string: String) {
+    string = string.toLocaleLowerCase();
+    let arrayStrings = string.split(" ");
+    let stringMid;
+    let stringEnd = "";
+    try {
+      for (let i = 0; i < arrayStrings.length; i++) {
+        stringMid = arrayStrings[i];
+        stringMid = stringMid[0].toUpperCase() + stringMid.slice(1) + " ";
+        stringEnd = stringEnd + stringMid;
+        
+      }
+    } catch (error) {
+      //console.error(error);
+    }
+    return stringEnd;
+  }
+
+  getGrauAcademico(value: Number){
+    let grauAcad: string = "";
+    try {
+      switch (value) {
+        case 1:
+          grauAcad = "Bacharelado";
+          break;
+        case 2:
+          grauAcad = "Licenciatura";
+          break;
+        case 3:
+          grauAcad = "Tecnológico";
+          break;
+        case 4:
+          grauAcad = "Bacharelado e Licenciatura";
+          break;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    return grauAcad;
+  }
+
 }
 
 @Component({
   selector: 'app-dialog-info',
   templateUrl: './app-dialog-info.component.html',
+  styleUrls: ['./app-dialog.component.scss']
 })
 export class AppDialogInfoComponent {}

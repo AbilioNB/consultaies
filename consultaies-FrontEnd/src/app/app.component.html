@@ -1,83 +1,158 @@
-<div class="content" role="main">
+<div class="gird-content">
+  <mat-grid-list cols="12" rowHeight="24">
+    <mat-grid-tile [colspan]="12"[rowspan]="2"></mat-grid-tile>
+    <mat-grid-tile class="grid-busca" [colspan]="3"[rowspan]="3">
+      <div class="div-selectTwo">
+        <mat-form-field class="select" appearance="outline">
+          <mat-label>Instituição</mat-label>
+          <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" >
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="changeIes($event.option.value)">
+            <!-- <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option.no_ies}}
+            </mat-option> -->
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2"[rowspan]="3">
+      <mat-divider class="divider-title"></mat-divider>
+      <h4 class="titulo-curso">
+        Cursos
+      </h4>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="7"[rowspan]="3">
+      <div class="div-titleTwo"> 
+        <mat-icon class="icon-span">school</mat-icon>
+        <h1 class="title">Consulta Ies</h1>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile class="gridListOne" [colspan]="3"[rowspan]="30" style="overflow: auto;">
+      <div class="listIesContent">
+        <button class="card card-small" *ngFor="let option of filteredOptions | async" (click)="search(option)">
+          <p> {{ capitalizeFirstChar(option.no_ies) }} </p>
+        </button>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="!iesSeleted" class="gridList" [colspan]="3"[rowspan]="30" style="overflow: auto;" >
+      <mat-icon class="iconGridList">travel_explore</mat-icon>
+      <p>Pesquise por uma Instituição</p>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="iesSeleted" class="gridListOne" [colspan]="3"[rowspan]="30" style="overflow: auto;">
+      <div class="listIesContent">
+        <button (click)="changeCourse(courseOption)" *ngFor="let courseOption of courseOptions" class="card card-small"  tabindex="0">
+          <p>{{ courseOption.no_cine_rotulo }}</p>
+        </button>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile class="gridList" [colspan]="6"[rowspan]="22">
+      <mat-icon class="iconGridList" *ngIf="!iesSeleted">apartment</mat-icon>
+      <p *ngIf="!iesSeleted">Selecione uma Instituição</p>
 
-  <div class="div-title"> 
-    <mat-icon class="icon-span">school</mat-icon>
-    <h1 class="title">Consulta Ies</h1>
-  </div>
-  
+      <mat-grid-list cols="12" rowHeight="20%" *ngIf="iesSeleted" class="gridContentIes">
+        <mat-grid-tile [colspan]="12"[rowspan]="1">
+          <H3>{{universitySeleted.no_ies}}</H3>
+          <button (click)="closeIes()" mat-mini-fab aria-label="Example icon button with a menu icon" class="btnCloseIes">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4"[rowspan]="1">
+          Estado: {{universitySeleted.no_uf_ies}}-{{universitySeleted.sg_uf_ies}}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4"[rowspan]="1">
+          Tipo da Categoria Administrativa da IES: {{getTpCatAdm(universitySeleted.tp_categoria_administrativa)}}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4"[rowspan]="1">
+          Municipio: {{universitySeleted.no_municipio_ies}}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4"[rowspan]="1">
+          Sigla IES: {{universitySeleted.sg_ies}}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4"[rowspan]="1">
+          Tipo da Organização Acadêmica da IES: {{getTpOrgAcad(universitySeleted.tp_organizacao_academica)}}
+        </mat-grid-tile>
+        
+        <mat-grid-tile [colspan]="4"[rowspan]="1">
+          Total de Docentes: {{universitySeleted.qt_docente_total}}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4"[rowspan]="1">
+          Catalogo online: 
+          <mat-slide-toggle
+            class="toggleInfo"
+            [checked]="isChecked(universitySeleted.in_catalogo_online)"
+            [disabled]="disabled">
+          </mat-slide-toggle>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4"[rowspan]="1">
+          Serviço de internet: 
+          <mat-slide-toggle
+            class="toggleInfo"
+            [checked]="isChecked(universitySeleted.in_servico_internet)"
+            [disabled]="disabled">
+          </mat-slide-toggle>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4"[rowspan]="1">
+          Repositorio institucional: 
+          <mat-slide-toggle
+            class="toggleInfo"
+            [checked]="isChecked(universitySeleted.in_repositorio_institucional)"
+            [disabled]="disabled">
+          </mat-slide-toggle>
+        </mat-grid-tile>
 
-  <div class="div-select">
-      <mat-form-field class="select" appearance="outline">
-        <mat-label>Instituição</mat-label>
-        <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" >
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="changeIes($event.option.value)">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{option.no_ies}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
- 
+        <mat-grid-tile [colspan]="4"[rowspan]="1">
+          Biblioteca Conectada: 
+          <mat-slide-toggle
+            class="toggleInfo"
+            [checked]="isChecked(universitySeleted.in_busca_integrada)"
+            [disabled]="disabled">
+          </mat-slide-toggle>
+        </mat-grid-tile>
 
-    <button mat-fab class="btn-search" aria-label="Example icon button with a delete icon" (click)="search()">
-      <mat-icon>search</mat-icon>
-    </button>
-  </div>
+        <mat-grid-tile [colspan]="4"[rowspan]="1">
+          Acesso ao portal CAPES: 
+          <mat-slide-toggle
+            class="toggleInfo"
+            [checked]="isChecked(universitySeleted.in_acesso_portal_capes)"
+            [disabled]="disabled">
+          </mat-slide-toggle>
+        </mat-grid-tile>
 
-  <div class="iesSelected" *ngIf="iesSeleted">
+        <mat-grid-tile [colspan]="4"[rowspan]="1">
+          Possui rede social: 
+          <mat-slide-toggle
+            class="toggleInfo"
+            [checked]="isChecked(universitySeleted.in_participa_rede_social)"
+            [disabled]="disabled">
+          </mat-slide-toggle>
+        </mat-grid-tile>
 
-    <button mat-mini-fab class="closeIesSeleted" (click)="closeCardIesSeleted()">
-      <mat-icon>close</mat-icon>
-    </button>
+      </mat-grid-list>
 
-    <mat-grid-list cols="3" rowHeight="5:1">
-      <mat-grid-tile [colspan]="3"[rowspan]="1">
-        <H3>{{universitySeleted.no_ies}}</H3>
-      </mat-grid-tile>
-      <mat-grid-tile [colspan]="1"[rowspan]="1">
-        Estado: {{universitySeleted.no_uf_ies}}-{{universitySeleted.sg_uf_ies}}
-      </mat-grid-tile>
-      <mat-grid-tile [colspan]="1"[rowspan]="1">
-        Tipo da Categoria Administrativa da IES: {{getTpCatAdm(universitySeleted.tp_categoria_administrativa)}}
-      </mat-grid-tile>
-      <mat-grid-tile [colspan]="1"[rowspan]="1">
-        Municipio: {{universitySeleted.no_municipio_ies}}
-      </mat-grid-tile>
-      <mat-grid-tile [colspan]="1"[rowspan]="1">
-        Sigla IES: {{universitySeleted.sg_ies}}
-      </mat-grid-tile>
-      <mat-grid-tile [colspan]="1"[rowspan]="1">
-        Tipo da Organização Acadêmica da IES: {{getTpOrgAcad(universitySeleted.tp_organizacao_academica)}}
-      </mat-grid-tile>
-      <mat-grid-tile [colspan]="1"[rowspan]="1">
-        Total de Docentes: {{universitySeleted.qt_docente_total}}
-      </mat-grid-tile>
-    </mat-grid-list>
+    </mat-grid-tile>
+    <mat-grid-tile class="gridList" [colspan]="6"[rowspan]="8">
+      <mat-icon *ngIf="!courseSeleted" class="iconGridList">menu_book</mat-icon>
+      <p *ngIf="!courseSeleted">Selecione um Curso</p>
 
-  </div>
+      <mat-grid-list cols="12" rowHeight="45%" *ngIf="courseSeleted" class="gridContentCourse">
+        <mat-grid-tile [colspan]="12"[rowspan]="1">
+          <H3>{{couseSeletec.co_cine_rotulo}}-{{couseSeletec.no_cine_rotulo}}</H3>
+          <button (click)="closeCourse()" mat-mini-fab aria-label="Example icon button with a menu icon" class="btnCloseIes">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4"[rowspan]="1">
+          Area especifica: {{couseSeletec.no_cine_area_especifica}}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4"[rowspan]="1">
+          Modalidade de ensino: {{getModalidade(couseSeletec.tp_modalidade_ensino)}}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4"[rowspan]="1">
+          Grau academico: {{getGrauAcademico(couseSeletec.tp_grau_academico)}}
+        </mat-grid-tile>
+      </mat-grid-list>
 
-  <div class="spinner-container" *ngIf="noDataFound">
-    <span class="spanNoDataFound" >
-      Nenhum curso encontrado 
-      <mat-icon class="noDataFoundIcon">sentiment_very_dissatisfied</mat-icon>
-    </span>
-  </div>
-
-  <div class="spinner-container" *ngIf="isLoading">
-    <mat-spinner></mat-spinner>
-  </div>
-
-
-  <div class="card-container" *ngIf="!isLoading && courseOptions != [] && iesSeleted">
-    <button *ngFor="let courseOption of courseOptions" class="card card-small"  tabindex="0">
-      <span>{{ courseOption.no_cine_rotulo }}</span>
-    </button>
-
-  </div>
-
-  <div class="spinner-container" *ngIf="!isLoading">
-
-  </div>
-
+    </mat-grid-tile>
+  </mat-grid-list>
 
   <button mat-fab class="fab-btn-info" (click)="openDialogInfo()">
     <mat-icon class="iconInfo">info_outlined</mat-icon>
@@ -88,6 +163,11 @@
     <title>Gray Clouds Background</title>
     <path id="Path_39" data-name="Path 39" d="M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z" transform="translate(142.69 -634.312)" fill="#eee"/>
   </svg>
-
+  <svg id="clouds-two" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
+    <title>Gray Clouds Background</title>
+    <path id="Path_39" data-name="Path 39" d="M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z" transform="translate(142.69 -634.312)" fill="#eee"/>
+  </svg>
 </div>
+
+
 
