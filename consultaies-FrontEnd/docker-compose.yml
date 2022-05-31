@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+
+  api_consulta_ies:
+    build: ./Docker/api
+    container_name: api_consulta_ies
+    command: python manage.py runserver 0.0.0.0:8000
+    tty: true
+    restart: unless-stopped
+    ports:
+     - 8000:8000
+  app:
+    build: ./
+    container_name: app_consulta_ies
+    tty: true
+    restart: unless-stopped
+    ports:
+     - 4200:80

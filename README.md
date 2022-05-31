@@ -27,6 +27,15 @@ O objetivo da API é trazer os dados direto da fonte do MEC  fazendo com que a i
 ## Back-End:
 * Framework de desenvolvimento de API REST em Python.
 
+## Para Executar
+
+### Executando pelo docker-compose
+Observação: Importante ter instalado o Docker e Docker-compose
+
+1- Basta clonar o repositorio e acessar a pasta consultaies-FrontEnd<br>
+2- Executar o comando **docker-compose up -d** no console do visualcode ou quaisquer outro console de sistema.<br>
+3- Acessar a ferramenta pelo endereço:
+> localhost:4200
 
 ## Equipe:
 * Abílio Nogueira 
