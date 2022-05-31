@@ -10,7 +10,6 @@ O objetivo da API é trazer os dados direto da fonte do MEC  fazendo com que a i
 
 ## Funcionalidades
 * Buscar e listar instituições pelo nome;
-* Receber informações sobre curso, campus e notas da instituição;
 * Informações sobre as notas da instituição;
 
 
