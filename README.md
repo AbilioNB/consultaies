@@ -17,15 +17,16 @@ O objetivo da API é trazer os dados direto da fonte do MEC  fazendo com que a i
 
 
 
-## Decisões Técnicas:
+## Tecnologias Utilizadas:
 
-### Front-End: [Angular]
-* Framework robusto com gerenciamento de rotas;
-* Carregamento de componentes sob demanda;
-* Componentes prontos e customizáveis.
+### Front-End: Angular
 
-## Back-End:
-* Framework de desenvolvimento de API REST em Python.
+### Back-End: Django REST Frameork
+
+### Banco de Dados: SQLITE3
+
+### Modelagem do Banco de Dados:
+![Mapeamento do Banco](mapeamento.png)
 
 
 ## Equipe:
