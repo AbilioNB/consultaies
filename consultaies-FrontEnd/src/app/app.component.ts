@@ -140,6 +140,13 @@ export class AppComponent implements OnInit {
     this.http.get<University[]>(urlForRequest).subscribe(
       data => {
         this.options = data;
+        // this.options.sort(function(a, b) {
+        //   if(a.no_ies < b.no_ies) {
+        //     return -1;
+        //   } else {
+        //     return 1;
+        //   }
+        // });
         //console.log(this.options);
       }
     );
@@ -151,7 +158,13 @@ export class AppComponent implements OnInit {
      await this.http.get<Course[]>(urlForRequest).subscribe(
       data => {
         this.courseOptions = data;
-        console.log(this.courseOptions);
+        this.courseOptions.sort(function(a, b) {
+          if(a.no_cine_rotulo < b.no_cine_rotulo) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
       }
     );
   }
